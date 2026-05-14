@@ -1,0 +1,3 @@
+123456, Raul Lopez, 8.5
+789447, Perez Longoria, 10
+484964, Ramirez Vazques, 9.8
