@@ -12,7 +12,7 @@ public class AlumnosDAO {
         this.nombreArchivo = nombreArchivo;
     }
 
-    public List<Alumno> leerTodos(){
+    public List<Alumno> leerTodos() throws FormatoArchivoException{
         ArrayList<Alumno> listaAlumnos = new ArrayList<>();
         Scanner entrada = null;
         try{
@@ -25,6 +25,9 @@ public class AlumnosDAO {
                 Alumno alumno = new Alumno(clave, arreglo [2], calificacion);
                 listaAlumnos.add(alumno);
             }
+        }
+        catch(NumberFormatException e){
+            throw new FormatoArchivoException("Se esperaba un numero en la entrada.");
         }
         catch(FileNotFoundException e){
             System.err.println("Archivo no encontrado " + nombreArchivo);
