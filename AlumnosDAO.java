@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -40,5 +42,31 @@ public class AlumnosDAO {
 
         return listaAlumnos;
 
+    }
+
+    public void agregaAlumno(Alumno alumno){
+        PrintWriter salida = null;
+        FileWriter archivo = null; //new FileWriter(nombreArchivo);
+        try{
+            List<Alumno> alumnos = this.leerTodos();
+            if (alumnos.contains(alumno)) {
+                throw new EstudianteDuplicadoException("No se puede agregar al alumno con clave " + alumno.getClave());
+            }
+            archivo = new FileWriter(nombreArchivo, true);
+            salida = new PrintWriter(archivo);
+            salida.println(alumno.toString());
+        }
+        catch(IOException e){
+            System.out.println("Error del archivo " + nombreArchivo);
+        }
+        catch(FormatoArchivoException e){
+            System.out.println(e.getMessage());
+        }
+        finally{
+            if (salida != null) {
+                salida.close();
+            }
+        }
+        
     }
 }
