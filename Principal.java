@@ -6,7 +6,8 @@ public class Principal {
         try {
             //List<Alumno> alumnos = alumnoDAO.leerTodos();
             //System.out.println(alumnos);
-            alumnoDAO.agregaAlumno(new Alumno(123456, "Tia Paola", 7));
+            //alumnoDAO.agregaAlumno(new Alumno(123456, "Tia Paola", 7));
+            alumnoDAO.eliminarAlumno(123456);
        }
        // catch(FormatoArchivoException | ArrayIndexOutOfBoundsException e){
            // System.err.println(e.getMessage());

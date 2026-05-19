@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class AlumnosDAO {
@@ -12,6 +13,23 @@ public class AlumnosDAO {
 
     public AlumnosDAO(String nombreArchivo){
         this.nombreArchivo = nombreArchivo;
+    }
+
+    public void escribirTodos(List<Alumno> listaAlumnos){
+        PrintWriter salida = null;
+        try {
+            salida = new PrintWriter(nombreArchivo);
+            for (Alumno alumno : listaAlumnos) {
+                salida.println(alumno);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            if (salida != null) {
+                salida.close();
+            }
+        }
     }
 
     public List<Alumno> leerTodos() throws FormatoArchivoException{
@@ -68,5 +86,27 @@ public class AlumnosDAO {
             }
         }
         
+    }
+
+    public void eliminarAlumno(int clave){
+        try{
+            List<Alumno> alumnos = this.leerTodos();
+            Iterator<Alumno> it = alumnos.iterator();
+            boolean encontrado = false;
+            while (it.hasNext()) {
+                Alumno alumno = it.next();
+                if (alumno.getClave() == clave) {
+                    it.remove();
+                    encontrado = true;
+                }
+            }
+            if (!encontrado) {
+                throw new EstudianteNoEncontrado("No existe el alumno con la clave " + clave);
+            }
+            escribirTodos(alumnos);
+        }
+        catch(FormatoArchivoException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
