@@ -109,4 +109,27 @@ public class AlumnosDAO {
             System.out.println(e.getMessage());
         }
     }
+
+    public void modificarAlumno(int clave, double nuevaCalificacion){
+        try{
+            List<Alumno> alumnos = this.leerTodos();
+            Iterator<Alumno> it = alumnos.iterator();
+            boolean encontrado = false;
+            while (it.hasNext()) {
+                Alumno alumno = it.next();
+                if (alumno.getClave() == clave) {
+                    //it.remove();
+                    alumno.setCalificacion(nuevaCalificacion);
+                    encontrado = true;
+                }
+            }
+            if (!encontrado) {
+                throw new EstudianteNoEncontrado("No existe el alumno con la clave " + clave);
+            }
+            escribirTodos(alumnos);
+        }
+        catch(FormatoArchivoException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

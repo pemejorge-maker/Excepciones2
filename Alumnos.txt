@@ -1,2 +1,2 @@
-789447,   Perez Longoria, 10.0
-484964,   Ramirez Vazques, 9.8
+789447,    Perez Longoria, 10
+484964,    Ramirez Vazques, 9.8

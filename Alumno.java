@@ -31,4 +31,11 @@ public class Alumno {
     public int getClave(){
         return clave;
     }
+
+    public void setCalificacion(double calificacion){
+        if (calificacion < 0 || calificacion > 10) {
+            throw new CalificacionInvalidaException("Calificacion fuera de rango");
+        }
+        this.calificacion = calificacion;
+    }
 }
